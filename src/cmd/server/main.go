@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/go-sql-driver/mysql"
 	"github.com/friendsofgo/graphiql"
 	"github.com/graphql-go/graphql"
 )
@@ -17,7 +18,6 @@ type Job struct {
 	Position       string   `json:"position"`
 	Company        string   `json:"company"`
 	Description    string   `json:"description"`
-	SkillsRequired []string `json:"skillsRequired"`
 	Location       string   `json:"location"`
 	EmploymentType string   `json:"employmentType"`
 }
@@ -43,9 +43,6 @@ var jobType = graphql.NewObject(
 			},
 			"employmentType": &graphql.Field{
 				Type: graphql.String,
-			},
-			"skillsRequired": &graphql.Field{
-				Type: graphql.NewList(graphql.String),
 			},
 		},
 	},
